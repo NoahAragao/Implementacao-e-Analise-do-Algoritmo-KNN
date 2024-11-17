@@ -66,8 +66,6 @@ fig.show()
 
 ##################################################################################################################
 # Caminho do arquivo de erro
-# Caminho do arquivo de erro
-# Caminho do arquivo de erro
 error_csv_path = 'C:/Users/mvna2/Documents/Programacao/restic36/knn_error.csv'
 
 # Carregar o arquivo de erro

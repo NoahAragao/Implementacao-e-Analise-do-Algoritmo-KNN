@@ -8,82 +8,79 @@ import numpy as np
 # Carregar o arquivo CSV
 df = pd.read_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv')
 
-# # Função para mapear países para códigos de continente
-# def map_country_to_continent(country):
-#     country_to_code = {
-#         # América do Sul
-#         'Brazil': 1,
-#         'Uruguay': 2,
-#         'Colombia': 3,
+# Função para mapear países para códigos de continente
+def map_country_to_continent(country):
+    country_to_code = {
+        # América do Sul
+        'Brazil': 1,
+        'Uruguay': 2,
+        'Colombia': 3,
         
-#         # América do Norte
-#         'United States': 20,
-#         'Canada': 21,
-#         'Mexico': 22,
-#         'Puerto Rico': 23,
-#         'British Virgin Islands': 24,
-#         'Anguilla': 25,
+        # América do Norte
+        'United States': 20,
+        'Canada': 21,
+        'Mexico': 22,
+        'Puerto Rico': 23,
+        'British Virgin Islands': 24,
+        'Anguilla': 25,
         
-#         # Europa
-#         'Spain': 40,
-#         'France': 41,
-#         'Netherlands': 42,
-#         'United Kingdom': 43,
-#         'Switzerland': 44,
-#         'Sweden': 45,
-#         'Czech Republic': 46,
-#         'Germany': 47,
-#         'Italy': 48,
-#         'Russia': 49,
+        # Europa
+        'Spain': 40,
+        'France': 41,
+        'Netherlands': 42,
+        'United Kingdom': 43,
+        'Switzerland': 44,
+        'Sweden': 45,
+        'Czech Republic': 46,
+        'Germany': 47,
+        'Italy': 48,
+        'Russia': 49,
         
-#         # Ásia e Oriente Médio
-#         'India': 60,
-#         'Turkey': 61,
-#         'United Arab Emirates': 62,
-#         "Côte d'Ivoire": 63,
-#         "Indonesia": 64,
+        # Ásia e Oriente Médio
+        'India': 60,
+        'Turkey': 61,
+        'United Arab Emirates': 62,
+        "Côte d'Ivoire": 63,
+        "Indonesia": 64,
         
-#         # Oceania
-#         'Australia': 80,
-#     }
-#     return country_to_code.get(country, 0)  # Retorna o código do continente ou 0 se o país não estiver mapeado
+        # Oceania
+        'Australia': 80,
+    }
+    return country_to_code.get(country, 0)  # Retorna o código do continente ou 0 se o país não estiver mapeado
 
-# # Substituir a coluna 'continent_code' com os códigos mapeados
-# df['continent_code'] = df['country'].apply(map_country_to_continent)
+# Substituir a coluna 'continent_code' com os códigos mapeados
+df['continent_code'] = df['country'].apply(map_country_to_continent)
 
-# # Salvar o DataFrame modificado no mesmo arquivo CSV
-# df.to_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv', index=False)
+# Salvar o DataFrame modificado no mesmo arquivo CSV
+df.to_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv', index=False)
 
-# print("Arquivo modificado e salvo com sucesso!")
+print("Arquivo modificado e salvo com sucesso!")
 
 ####################################################################################################################################################################
 
-# # Função para converter valores com sufixos 'k', 'm', 'b' para números
-# def convert_to_numeric(value):
-#     if isinstance(value, str):
-#         value = value.lower()
-#         if 'k' in value:
-#             return float(value.replace('k', '')) * 1e3  # Mil
-#         elif 'm' in value:
-#             return float(value.replace('m', '')) * 1e6  # Milhão
-#         elif 'b' in value:
-#             return float(value.replace('b', '')) * 1e9  # Bilhão
-#     return value  # Caso o valor não tenha sufixo, retornar o valor original
+# Função para converter valores com sufixos 'k', 'm', 'b' para números
+def convert_to_numeric(value):
+    if isinstance(value, str):
+        value = value.lower()
+        if 'k' in value:
+            return float(value.replace('k', '')) * 1e3  # Mil
+        elif 'm' in value:
+            return float(value.replace('m', '')) * 1e6  # Milhão
+        elif 'b' in value:
+            return float(value.replace('b', '')) * 1e9  # Bilhão
+    return value  # Caso o valor não tenha sufixo, retornar o valor original
 
-# # Carregar seu DataFrame (substitua pelo caminho do seu arquivo)
-# df = pd.read_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv')
+# Colunas a serem convertidas para números
+cols_to_convert = ['followers', 'avg_likes', 'new_post_avg_like', 'total_likes', 'posts']
 
-# # Colunas a serem convertidas para números
-# cols_to_convert = ['followers', 'avg_likes', 'new_post_avg_like', 'total_likes', 'posts']
+# Aplicar a conversão nas colunas listadas
+for col in cols_to_convert:
+    df[col] = df[col].apply(convert_to_numeric)
 
-# # Aplicar a conversão nas colunas listadas
-# for col in cols_to_convert:
-#     df[col] = df[col].apply(convert_to_numeric)
+# Sobrescrever o arquivo original com as alterações
+df.to_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv', index=False)
 
-# # Sobrescrever o arquivo original com as alterações
-# df.to_csv('C:/Users/mvna2/Documents/Programacao/restic36/top_insta_influencers_data.csv', index=False)
-
-# print("Arquivo modificado e salvo com sucesso!")
+print("Arquivo modificado e salvo com sucesso!")
 
 #########################################################################################################################
 
